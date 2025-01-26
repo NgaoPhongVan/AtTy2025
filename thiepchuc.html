@@ -555,62 +555,66 @@
         });
       }
 
-      function getTextLines(ctx, text, maxWidth) {
-        const chars = [...text];
-        const lines = [];
-        let currentLine = chars[0];
-
-        for (let i = 1; i < chars.length; i++) {
-          const char = chars[i];
-          const width = ctx.measureText(currentLine + char).width;
-          if (width < maxWidth) {
-            currentLine += char;
-          } else {
-            lines.push(currentLine);
-            currentLine = char;
-          }
-        }
-        lines.push(currentLine);
-        return lines;
-      }
-
-      function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-        const words = text.split(" ");
-        let line = "";
-
-        for (let n = 0; n < words.length; n++) {
-          const testLine = line + words[n] + " ";
-          const metrics = ctx.measureText(testLine);
-          const testWidth = metrics.width;
-
-          if (testWidth > maxWidth && n > 0) {
-            ctx.fillText(line, x, y);
-            line = words[n] + " ";
-            y += lineHeight;
-          } else {
-            line = testLine;
-          }
-        }
-        ctx.fillText(line, x, y);
-      }
-
       function shareCard() {
-        if (navigator.share) {
-          html2canvas(document.getElementById("card-preview")).then(
-            (canvas) => {
-              canvas.toBlob((blob) => {
-                const file = new File([blob], "thiep-tet.png", {
-                  type: "image/png",
-                });
-                navigator.share({
-                  files: [file],
-                  title: "Thiệp chúc Tết",
-                  text: "Chúc mừng năm mới!",
-                });
-              });
-            }
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 853;
+        canvas.height = 1280;
+        const scale = 2.42;
+
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const textBox = document.querySelector(".back");
+          const wishText = document.getElementById("wish-text");
+          const boxStyle = getComputedStyle(textBox);
+          const textStyle = getComputedStyle(wishText);
+
+          const boxWidth = parseInt(boxStyle.width) * scale;
+          const boxHeight = parseInt(boxStyle.height) * scale;
+          const boxX = (canvas.width - boxWidth) / 2;
+          const boxY = (canvas.height - boxHeight) / 2;
+
+          ctx.fillStyle = "#770100";
+          ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+
+          const fontSize = parseInt(textStyle.fontSize) * scale;
+          const lineHeight = parseFloat(textStyle.lineHeight) * fontSize;
+          ctx.font = `700 ${fontSize}px ${wishText.style.fontFamily}`;
+          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          drawWrappedText(
+            ctx,
+            wishText.textContent,
+            boxX,
+            boxY,
+            boxWidth,
+            boxHeight,
+            fontSize,
+            wishText.style.fontFamily
           );
-        }
+
+          if (navigator.share) {
+            canvas.toBlob((blob) => {
+              const file = new File([blob], "ChucTetAtTy_NgaoPhongVan.png", {
+                type: "image/png",
+              });
+              navigator.share({
+                files: [file],
+                title: "Thiệp chúc Tết",
+                text: "Chúc mừng năm mới!",
+              });
+            });
+          }
+        };
+        img.src = document.getElementById("background").src;
       }
 
       function updateFontSize(size) {
