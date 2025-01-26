@@ -440,9 +440,36 @@
         },
       ];
 
+      function addLoadingIndicator() {
+        const preview = document.getElementById("card-preview");
+        const loadingOverlay = document.createElement("div");
+        loadingOverlay.id = "loading-overlay";
+        loadingOverlay.className =
+          "absolute inset-0 bg-black/50 flex items-center justify-center z-10";
+        loadingOverlay.innerHTML = `
+       <div class="animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent"></div>
+   `;
+        preview.appendChild(loadingOverlay);
+      }
+
+      function removeLoadingIndicator() {
+        const overlay = document.getElementById("loading-overlay");
+        if (overlay) overlay.remove();
+      }
+
       function randomBackground() {
+        addLoadingIndicator();
         const bg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-        document.getElementById("background").src = `./images/${bg}`;
+        const imgElement = (document.getElementById(
+          "background"
+        ).src = `./images/${bg}`);
+
+        const newImage = new Image();
+        newImage.onload = () => {
+          imgElement.src = `./images/${bg}`;
+          removeLoadingIndicator();
+        };
+        newImage.src = `./images/${bg}`;
       }
 
       function randomWish() {
