@@ -2,12 +2,12 @@
 <html lang="vi">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Tết Nguyên Đán 2025</title>
+    <title>Tạo Thiệp Chúc Tết 2025</title>
     <meta
       name="viewport"
       content="width=device-width,initial-scale=1,shrink-to-fit=no"
     />
-    <meta name="title" content="Tết Nguyên Đán 2025" />
+    <meta name="title" content="Tạo Thiệp Chúc Tết 2025" />
     <meta name="author" content="Le Van Thuan - Ngao Phong Van" />
     <meta name="description" content="Website Le Van Thuan - Ngao Phong Van" />
     <meta
@@ -16,13 +16,13 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://bnatlu.id.vn" />
-    <meta property="og:title" content="Tết Nguyên Đán 2025" />
+    <meta property="og:title" content="Tạo Thiệp Chúc Tết 2025" />
     <meta
       property="og:description"
       content="Website Le Van Thuan - Ngao Phong Van"
     />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Tết Nguyên Đán 2025" />
+    <meta property="twitter:title" content="Tạo Thiệp Chúc Tết 2025" />
     <meta
       property="twitter:description"
       content="Website Le Van Thuan - Ngao Phong Van"
@@ -35,209 +35,1150 @@
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <style>
-      .container {
+      @font-face {
+        font-family: "TenFont1";
+        src: url("./fonts/Hoa Sen Typeface.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "TenFont2";
+        src: url("./fonts/TP Frauen Roman.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "TenFont3";
+        src: url("./fonts/TP Frauen Script.ttf") format("truetype");
+      }
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .bg-gradient-to-r {
+        background-size: 200% 200%;
+        animation: gradient 15s ease infinite;
+      }
+      .sticker-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 10px;
+        padding: 10px;
+        background: white;
+        border-radius: 8px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .sticker-item {
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .sticker-item:hover {
+        transform: scale(1.1);
+      }
+
+      .canvas-container {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        pointer-events: auto;
+        z-index: 10;
+      }
+
+      .canvas-container canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .background-container {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 1rem;
+        height: 100%;
+        z-index: 10;
+      }
+
+      .text-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 20;
+        pointer-events: none; /* Quan trọng: cho phép click xuyên qua vào canvas */
+      }
+
+      .text-overlay .back,
+      .text-overlay .bg-black\/50 {
+        pointer-events: auto;
+      }
+
+      .sticker-controls {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 8px;
+        border-radius: 20px;
+        z-index: 30;
+      }
+
+      .control-btn {
+        background: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .control-btn:hover {
+        background: #f0f0f0;
       }
     </style>
   </head>
-  <body class="min-h-screen bg-red-50">
-    <!-- Header -->
-    <header class="bg-red-600 text-white py-8">
-      <div class="container mx-auto text-center px-4">
-        <h1 class="text-4xl font-bold mb-4">Tết Nguyên Đán 2025</h1>
-        <p class="text-xl">Chào Xuân Ất Tỵ</p>
+  <body class="bg-red-50">
+    <header
+      class="bg-gradient-to-r from-red-700 to-red-500 text-white py-12 relative overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute inset-0"
+          style="
+            background-image: url('images/pattern.png');
+            background-repeat: repeat;
+          "
+        ></div>
+      </div>
+
+      <div class="container mx-auto text-center px-4 relative z-10">
+        <h1
+          class="text-5xl font-bold mb-6"
+          style="font-family: 'TenFont1', sans-serif"
+        >
+          Tạo Thiệp Chúc Tết 2025
+        </h1>
+        <p class="text-xl mb-8">Thiệp chúc Tết độc đáo và ý nghĩa</p>
+
+        <div class="flex justify-center gap-4 text-center">
+          <div class="bg-red-800/50 rounded-lg p-4 min-w-[80px]">
+            <div id="days" class="text-3xl font-bold">00</div>
+            <div class="text-sm">Ngày</div>
+          </div>
+          <div class="bg-red-800/50 rounded-lg p-4 min-w-[80px]">
+            <div id="hours" class="text-3xl font-bold">00</div>
+            <div class="text-sm">Giờ</div>
+          </div>
+          <div class="bg-red-800/50 rounded-lg p-4 min-w-[80px]">
+            <div id="minutes" class="text-3xl font-bold">00</div>
+            <div class="text-sm">Phút</div>
+          </div>
+          <div class="bg-red-800/50 rounded-lg p-4 min-w-[80px]">
+            <div id="seconds" class="text-3xl font-bold">00</div>
+            <div class="text-sm">Giây</div>
+          </div>
+        </div>
       </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto py-12 px-4">
-      <!-- Countdown -->
-      <div class="text-center mb-12">
-        <h2 class="text-2xl font-bold text-red-800 mb-4">
-          Còn bao lâu nữa đến Tết?
-        </h2>
-        <div class="bg-white p-6 rounded-lg shadow-lg inline-block">
-          <div class="grid grid-cols-4 gap-4">
-            <div class="text-center">
-              <div id="days" class="text-4xl font-bold text-red-600">00</div>
-              <div class="text-gray-600">Ngày</div>
-            </div>
-            <div class="text-center">
-              <div id="hours" class="text-4xl font-bold text-red-600">00</div>
-              <div class="text-gray-600">Giờ</div>
-            </div>
-            <div class="text-center">
-              <div id="minutes" class="text-4xl font-bold text-red-600">00</div>
-              <div class="text-gray-600">Phút</div>
-            </div>
-            <div class="text-center">
-              <div id="seconds" class="text-4xl font-bold text-red-600">00</div>
-              <div class="text-gray-600">Giây</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Traditions Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div
-          class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105"
-        >
-          <div class="flex items-center justify-center mb-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-red-600"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-red-800 text-center mb-4">
-            Lịch Tết 2025
-          </h3>
-          <div class="space-y-3">
-            <div class="border-b pb-2">
-              <p class="font-semibold text-red-700">29 tháng Chạp (28/1)</p>
-              <p class="text-gray-600 text-sm">Tất niên, cúng ông Táo</p>
-            </div>
-            <div class="border-b pb-2">
-              <p class="font-semibold text-red-700">30 tháng Chạp (29/1)</p>
-              <p class="text-gray-600 text-sm">Giao thừa</p>
-            </div>
-            <div class="border-b pb-2">
-              <p class="font-semibold text-red-700">Mùng 1 Tết (30/1)</p>
-              <p class="text-gray-600 text-sm">Khai xuân, xông đất</p>
-            </div>
-            <div class="border-b pb-2">
-              <p class="font-semibold text-red-700">Mùng 2 Tết (31/1)</p>
-              <p class="text-gray-600 text-sm">Thăm họ nội</p>
-            </div>
-            <div class="border-b pb-2">
-              <p class="font-semibold text-red-700">Mùng 3 Tết (1/2)</p>
-              <p class="text-gray-600 text-sm">Thăm họ ngoại</p>
-            </div>
-          </div>
-          <button
-            class="mt-4 text-red-600 hover:text-red-800 text-sm font-medium"
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Preview Card -->
+        <div class="relative">
+          <div
+            id="card-preview"
+            class="relative w-[353px] h-[530px] mx-auto shadow-xl rounded-lg overflow-hidden"
           >
-            Xem thêm →
-          </button>
+            <!-- Background container -->
+            <div class="background-container">
+              <img
+                id="background"
+                src="images/Tet (11).jpg"
+                alt="Background"
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <!-- Canvas cho stickers -->
+            <canvas id="sticker-canvas" width="353" height="530"></canvas>
+
+            <!-- Text overlay -->
+            <div class="text-overlay">
+              <div
+                class="back bg-[#770100] p-8 w-[280px] min-h-[150px] rounded-lg flex items-center justify-center border-2 border-white/50"
+              >
+                <p
+                  id="wish-text"
+                  class="text-white text-center text-2xl"
+                  style="
+                    font-family: 'TenFont1', sans-serif;
+                    line-height: 1.5;
+                    font-weight: 700;
+                  "
+                >Chúc Mừng Năm Mới</p>
+              </div>
+              <div class="bg-black/50 p-4 w-[280px] rounded-lg">
+                <p id="wish-meaning" class="text-white/90 text-center text-sm">
+                  Ý nghĩa: Lời chúc truyền thống ngày Tết
+                </p>
+              </div>
+            </div>
+
+            <!-- Sticker controls -->
+            <div class="sticker-controls">
+              <button class="control-btn" onclick="deleteSelectedObject()">
+                Xóa
+              </button>
+              <button class="control-btn" onclick="bringToFront()">
+                Lên
+              </button>
+              <button class="control-btn" onclick="sendToBack()">
+                Xuống
+              </button>
+            </div>
+          </div>
+
+          <!-- Thêm panel sticker -->
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-red-800 mb-4">
+              Sticker và Họa tiết
+            </h3>
+            <div class="sticker-container" id="stickerContainer"></div>
+          </div>
         </div>
 
-        <a
-          href="nhacua.html"
-          class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105"
-        >
-          <div>
-            <div class="flex items-center justify-center mb-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-8 h-8 text-red-600"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
+        <!-- Controls -->
+        <div class="space-y-6">
+          <!-- Background Control -->
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-red-800 mb-4">Hình nền</h3>
+            <button
+              id="random-bg"
+              class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+            >
+              Đổi hình nền
+            </button>
+          </div>
+
+          <!-- Wish Text Control -->
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-red-800 mb-4">Lời chúc</h3>
+            <div class="space-y-4">
+              <button
+                id="random-wish"
+                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
               >
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
+                Đổi lời chúc
+              </button>
+              <div>
+                <label class="block text-gray-700 mb-2"
+                  >Hoặc nhập lời chúc của bạn:</label
+                >
+                <textarea
+                  id="custom-wish"
+                  rows="3"
+                  class="w-full border rounded p-2"
+                ></textarea>
+              </div>
+              <!-- Font size -->
+              <div>
+                <label class="block text-gray-700 mb-2">Kích thước chữ:</label>
+                <input
+                  type="range"
+                  id="font-size"
+                  min="16"
+                  max="48"
+                  value="24"
+                  class="w-full"
+                  oninput="updateFontSize(this.value)"
+                />
+              </div>
+
+              <!-- Font family -->
+              <div>
+                <label class="block text-gray-700 mb-2">Font chữ:</label>
+                <div class="relative">
+                  <button
+                    onclick="toggleFontDropdown()"
+                    class="w-full border rounded p-2 flex justify-between items-center bg-white"
+                  >
+                    <span id="selected-font">Font 1</span>
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+
+                  <div
+                    id="font-dropdown"
+                    class="hidden absolute w-full mt-1 bg-white border rounded shadow-lg z-50"
+                  >
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont1')"
+                      style="font-family: 'TenFont1', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont2')"
+                      style="font-family: 'TenFont2', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont3')"
+                      style="font-family: 'TenFont3', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                function toggleFontDropdown() {
+                  const dropdown = document.getElementById("font-dropdown");
+                  dropdown.classList.toggle("hidden");
+                }
+
+                function selectFont(fontFamily) {
+                  updateFont(fontFamily);
+                  document.getElementById(
+                    "selected-font"
+                  ).style.fontFamily = `'${fontFamily}', sans-serif`;
+                  document.getElementById("selected-font").textContent =
+                    fontFamily === "TenFont1"
+                      ? "Font 1"
+                      : fontFamily === "TenFont2"
+                      ? "Font 2"
+                      : "Font 3";
+                  toggleFontDropdown();
+                }
+
+                // Đóng dropdown khi click ra ngoài
+                document.addEventListener("click", function (e) {
+                  const dropdown = document.getElementById("font-dropdown");
+                  const button = e.target.closest("button");
+                  if (!button && !dropdown.contains(e.target)) {
+                    dropdown.classList.add("hidden");
+                  }
+                });
+              </script>
+
+              <!-- Toggle meaning -->
+              <div class="flex items-center">
+                <input
+                  type="checkbox"
+                  id="show-meaning"
+                  checked
+                  class="mr-2"
+                  onchange="toggleMeaning(this.checked)"
+                />
+                <label class="text-gray-700">Hiển thị ý nghĩa</label>
+              </div>
             </div>
-            <h3 class="text-xl font-bold text-red-800 text-center mb-2">
-              Trang Trí Nhà Cửa
+          </div>
+
+          <!-- Download & Share -->
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold text-red-800 mb-4">
+              Tải về & Chia sẻ
             </h3>
-            <p class="text-gray-600 text-center">
-              Hoa đào, hoa mai, câu đối đỏ
-            </p>
+            <div class="space-y-4">
+              <div class="flex gap-4">
+                <button
+                  id="download"
+                  class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                >
+                  Tải về
+                </button>
+                <button
+                  id="share"
+                  class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                >
+                  Chia sẻ
+                </button>
+              </div>
+            </div>
           </div>
-        </a>
-
-        <a
-          href="monan.html"
-          class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105"
-        >
-          <div class="flex items-center justify-center mb-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-red-600"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M20 12v10H4V12"></path>
-              <path d="M2 7h20v5H2z"></path>
-              <path d="M12 22V7"></path>
-              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-red-800 text-center mb-2">
-            Món Ăn Truyền Thống
-          </h3>
-          <p class="text-gray-600 text-center">Bánh chưng, mứt Tết, dưa hành</p>
-        </a>
-
-        <a
-          href="thiepchuc.html"
-          class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105"
-        >
-          <div class="flex items-center justify-center mb-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-red-600"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-red-800 text-center mb-2">
-            Phong Tục
-          </h3>
-          <p class="text-gray-600 text-center">Xông đất, mừng tuổi, chúc Tết</p>
-        </a>
-      </div>
-
-      <!-- Wishes Section -->
-      <div class="text-center mt-12">
-        <h2 class="text-2xl font-bold text-red-800 mb-6">Lời Chúc Năm Mới</h2>
-        <div
-          class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105"
-        >
-          <p class="text-lg italic text-red-600">
-            "Năm mới phát tài, vạn sự như ý"
-          </p>
         </div>
       </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-red-600 text-white py-6 mt-12">
-      <div class="container mx-auto text-center">
-        <p>© 2025 - Chúc Mừng Năm Mới</p>
+    <footer
+      class="bg-gradient-to-r from-red-700 to-red-500 text-white py-8 mt-12"
+    >
+      <div class="container mx-auto text-center px-4">
+        <p
+          id="rotating-wish"
+          class="text-2xl font-bold mb-4"
+          style="font-family: 'TenFont1', sans-serif"
+        >
+          <!-- Rotating wishes will be displayed here -->
+        </p>
+        <p class="text-sm opacity-75">
+          © 2024 Thiệp Chúc Tết. Thiết kế bởi Lê Văn Thuận - Ngạo Phong Vân
+        </p>
       </div>
     </footer>
-
     <script>
+      const backgrounds = [
+        {
+          preview: "images/webp/Tet (1).webp",
+          original: "images/Tet (1).jpg",
+        },
+        {
+          preview: "images/webp/Tet (2).webp",
+          original: "images/Tet (2).jpg",
+        },
+        {
+          preview: "images/webp/Tet (3).webp",
+          original: "images/Tet (3).jpg",
+        },
+        {
+          preview: "images/webp/Tet (4).webp",
+          original: "images/Tet (4).jpg",
+        },
+        {
+          preview: "images/webp/Tet (5).webp",
+          original: "images/Tet (5).jpg",
+        },
+        {
+          preview: "images/webp/Tet (6).webp",
+          original: "images/Tet (6).jpg",
+        },
+        {
+          preview: "images/webp/Tet (7).webp",
+          original: "images/Tet (7).jpg",
+        },
+        {
+          preview: "images/webp/Tet (8).webp",
+          original: "images/Tet (8).jpg",
+        },
+        {
+          preview: "images/webp/Tet (9).webp",
+          original: "images/Tet (9).jpg",
+        },
+        {
+          preview: "images/webp/Tet (10).webp",
+          original: "images/Tet (10).jpg",
+        },
+        {
+          preview: "images/webp/Tet (11).webp",
+          original: "images/Tet (11).jpg",
+        },
+        {
+          preview: "images/webp/Tet (12).webp",
+          original: "images/Tet (12).jpg",
+        },
+        {
+          preview: "images/webp/Tet (13).webp",
+          original: "images/Tet (13).jpg",
+        },
+        {
+          preview: "images/webp/Tet (14).webp",
+          original: "images/Tet (14).jpg",
+        },
+        {
+          preview: "images/webp/Tet (15).webp",
+          original: "images/Tet (15).jpg",
+        },
+        {
+          preview: "images/webp/Tet (16).webp",
+          original: "images/Tet (16).jpg",
+        },
+        {
+          preview: "images/webp/Tet (17).webp",
+          original: "images/Tet (17).jpg",
+        },
+        {
+          preview: "images/webp/Tet (18).webp",
+          original: "images/Tet (18).jpg",
+        },
+        {
+          preview: "images/webp/Tet (19).webp",
+          original: "images/Tet (19).jpg",
+        },
+      ];
+
+      const wishes = [
+        {
+          text: "Cung Chúc Tân Xuân Phước Thọ Khang Ninh",
+          meaning:
+            "Kính chúc năm mới an khang, phúc đức, sống lâu và mạnh khỏe.",
+        },
+        {
+          text: "Vạn Sự Như Ý",
+          meaning: "Chúc mọi việc đều được như ý muốn.",
+        },
+        {
+          text: "An Khang Thịnh Vượng",
+          meaning: "Chúc an lành, khỏe mạnh và làm ăn phát đạt, giàu có.",
+        },
+        {
+          text: "Sức Khỏe Dồi Dào",
+          meaning: "Chúc luôn có sức khỏe tốt, tràn đầy năng lượng.",
+        },
+        {
+          text: "Tấn Tài Tấn Lộc",
+          meaning: "Chúc tài lộc và may mắn ngày càng tăng tiến.",
+        },
+        {
+          text: "Gia Đạo Bình An",
+          meaning: "Chúc gia đình luôn hòa thuận, yên ấm và bình an.",
+        },
+        {
+          text: "Năm Mới Bình An, Vạn Sự Cát Tường",
+          meaning: "Chúc năm mới bình yên và mọi điều đều tốt lành, may mắn.",
+        },
+        {
+          text: "Bách Niên Giai Lão",
+          meaning: "Chúc sống lâu trăm tuổi (dành cho người lớn tuổi).",
+        },
+        {
+          text: "Ngũ Phúc Lâm Môn",
+          meaning:
+            "Chúc năm phúc (Phúc, Lộc, Thọ, Khang, Ninh) đến với gia đình.",
+        },
+        {
+          text: "Xuân Đến An Khang, Tết Về Thịnh Vượng",
+          meaning:
+            "Chúc mùa xuân đến mang lại an khang và Tết về mang lại sự thịnh vượng.",
+        },
+        {
+          text: "Công Thành Danh Toại",
+          meaning: "Chúc công việc thành công và danh tiếng được vang xa.",
+        },
+        {
+          text: "Mã Đáo Thành Công",
+          meaning:
+            "Chúc mọi việc đến đều sẽ thành công (nhanh chóng và tốt đẹp).",
+        },
+        {
+          text: "Phúc Lộc Đầy Nhà",
+          meaning: "Chúc phúc đức và tài lộc đầy ắp trong nhà.",
+        },
+        {
+          text: "Hoa Khai Phú Quý, Lộc Đến An Khang",
+          meaning:
+            "Chúc hoa nở mang lại sự giàu sang và lộc đến mang lại sự an khang.",
+        },
+        {
+          text: "Đầu Xuân Năm Mới, An Khang Vạn Sự Lành",
+          meaning: "Chúc đầu xuân năm mới luôn an khang và mọi sự đều tốt đẹp.",
+        },
+        {
+          text: "Chúc Mừng Năm Mới Vạn Điều Như Ý, Triệu Sự An Khang",
+          meaning:
+            "Chúc mừng năm mới mọi điều được như ý, triệu sự được an khang.",
+        },
+        {
+          text: "Tân Niên Khởi Sắc, Vạn Lộc Đơm Hoa",
+          meaning: "Chúc năm mới khởi sắc, vạn lộc nảy nở như hoa.",
+        },
+        {
+          text: "Xuân An Khang Đức Tài Vượng Tiến",
+          meaning: "Chúc mùa xuân an khang, đức độ và tài lộc đều vượng tiến.",
+        },
+        {
+          text: "Gia Đình Hạnh Phúc An Hòa, Vạn Sự Cát Tường Thành Công",
+          meaning:
+            "Chúc gia đình hạnh phúc, an hòa và mọi sự đều tốt lành, thành công.",
+        },
+        {
+          text: "Chúc Xuân Như Ý, Đón Tết Phát Tài",
+          meaning: "Chúc mùa xuân mọi việc được như ý, đón Tết đến tài lộc.",
+        },
+        {
+          text: "Năm Mới Sum Vầy, An Yên Tự Tại",
+          meaning: "Chúc năm mới gia đình sum vầy, tâm hồn an yên, tự tại.",
+        },
+        {
+          text: "Chúc Tết Đến Trăm Điều May, Xuân Sang Vạn Sự Thành",
+          meaning:
+            "Chúc Tết đến mang trăm điều may mắn, mùa xuân sang vạn sự thành công.",
+        },
+        {
+          text: "Đầu Năm Sức Khỏe Dồi Dào, Cả Năm An Lạc, Hạnh Phúc Tràn Đầy",
+          meaning:
+            "Chúc đầu năm sức khỏe dồi dào, cả năm an lạc và hạnh phúc tràn đầy.",
+        },
+        {
+          text: "Chúc Bạn Năm Mới Đắc Lộc Đắc Tài, Vạn Sự Hanh Thông, An Khang Thịnh Vượng",
+          meaning:
+            "Chúc bạn năm mới đạt được nhiều lộc và tài, mọi việc hanh thông, an khang và thịnh vượng.",
+        },
+        {
+          text: "Kính Chúc Tân Xuân Vô Ưu Vô Lo, An Nhiên Tự Tại, Sống Khỏe Sống Vui",
+          meaning:
+            "Kính chúc năm mới không ưu phiền lo lắng, an nhiên tự tại, sống khỏe mạnh và vui vẻ (dành cho người lớn tuổi).",
+        },
+        {
+          text: "Chúc Năm Mới Tâm An Khang Thái, Vạn Sự Cát Lành, Như Ý Nguyện",
+          meaning:
+            "Chúc năm mới tâm hồn an yên, khỏe mạnh, mọi sự tốt lành và được như ý nguyện.",
+        },
+        {
+          text: "Tân Xuân Phú Quý An Khang, Vạn Sự May Mắn Cát Tường",
+          meaning:
+            "Chúc năm mới phú quý, an khang, vạn sự may mắn và tốt lành.",
+        },
+        {
+          text: "Chúc Mừng Năm Mới An Khang, Vạn Sự Như Mơ, Tỷ Điều Bất Ngờ",
+          meaning:
+            "Chúc mừng năm mới an khang, mọi sự như mơ và có tỷ điều bất ngờ thú vị.",
+        },
+        {
+          text: "Xuân Mới Rộn Ràng, Cả Nhà Bình An, Vạn Sự Như Ý, Tỷ Sự Cát Tường",
+          meaning:
+            "Chúc mùa xuân mới rộn ràng, cả nhà bình an, vạn sự như ý và tỷ sự tốt lành.",
+        },
+        {
+          text: "Chúc Tết Đoàn Viên, Cả Nhà Sum Họp, An Khang Hạnh Phúc, Vạn Lộc Đến Nhà",
+          meaning:
+            "Chúc Tết đoàn viên, cả nhà sum họp, an khang hạnh phúc và vạn lộc đến nhà.",
+        },
+
+        {
+          text: "Chúc Mừng Năm Mới Phú Quý Cát Tường, An Khang Thịnh Vượng Vạn Sự Như Ý",
+          meaning:
+            "Lời chúc toàn diện về phú quý, may mắn, an khang, thịnh vượng và mọi việc như ý.",
+        },
+        {
+          text: "Tân Xuân Rực Rỡ, Vạn Sự Khởi Sắc, Cát Tinh Chiếu Mệnh",
+          meaning:
+            "Chúc năm mới rực rỡ, mọi sự khởi đầu tốt đẹp và sao tốt chiếu mệnh.",
+        },
+        {
+          text: "Xuân Về Muôn Hoa Nở Rộ, Tết Đến Tràn Ngập Niềm Vui, Gia Đình Hạnh Phúc",
+          meaning:
+            "Chúc mùa xuân về muôn hoa nở rộ, Tết đến tràn ngập niềm vui và gia đình luôn hạnh phúc.",
+        },
+        {
+          text: "Chúc Năm Mới Tâm Thanh Tịnh, Vạn Sự An Nhiên, Cuộc Sống Viên Mãn",
+          meaning:
+            "Chúc năm mới tâm hồn thanh tịnh, mọi sự an nhiên và cuộc sống viên mãn (tập trung vào sự bình yên nội tâm).",
+        },
+        {
+          text: "Kính Chúc Tân Xuân Thân Cung Khang Kiện, Tuế Nguyệt Trường Xuân, Phúc Như Đông Hải",
+          meaning:
+            "Kính chúc năm mới thân thể khỏe mạnh, tuổi thọ kéo dài như mùa xuân và phúc đức như biển Đông (dành cho người lớn tuổi, rất trang trọng).",
+        },
+        {
+          text: "Chúc Xuân Đắc Lộc Đắc Tài, Gia Hòa Vạn Sự Hưng",
+          meaning:
+            "Chúc mùa xuân đạt được nhiều lộc và tài, gia đình hòa thuận thì vạn sự hưng thịnh.",
+        },
+        {
+          text: "Năm Mới Hỷ Khí Nghênh Xuân, Vạn Phúc Lai Gia, An Khang Toàn Gia",
+          meaning:
+            "Chúc năm mới tràn ngập hỷ khí đón xuân, vạn phúc đến nhà và cả gia đình an khang.",
+        },
+        {
+          text: "Chúc Bạn Xuân Mới Đắc Ý, Vạn Sự Thành Công, Tình Duyên Mỹ Mãn",
+          meaning:
+            "Chúc bạn mùa xuân mới đắc ý trong mọi việc, vạn sự thành công và tình duyên mỹ mãn (thêm lời chúc về tình duyên).",
+        },
+        {
+          text: "Tân Niên Như Ý Cát Tường, Xuân Đến Phú Quý Vinh Quang",
+          meaning:
+            "Chúc năm mới như ý và tốt lành, xuân đến mang lại phú quý và vinh quang.",
+        },
+        {
+          text: "Chúc Mừng Năm Mới An Khang, Tài Lộc Đến Nhà, Công Danh Rạng Rỡ",
+          meaning:
+            "Chúc mừng năm mới an khang, tài lộc đến nhà và công danh được rạng rỡ.",
+        },
+        {
+          text: "Xuân Mới An Lành Khởi Sắc, Gia Đình Hạnh Phúc Thắm Tình",
+          meaning:
+            "Chúc mùa xuân mới an lành và khởi sắc, gia đình hạnh phúc và tình cảm thêm thắm thiết.",
+        },
+        {
+          text: "Chúc Tết Đến Nhà Vạn Điều May, Xuân Sang An Lạc Trọn Năm Dài",
+          meaning:
+            "Chúc Tết đến nhà mang vạn điều may mắn, mùa xuân sang an lạc trọn cả năm dài.",
+        },
+        {
+          text: "Kính Chúc Ông Bà/Cha Mẹ Trường Thọ Vô Cương, Gia Đình Hạnh Phúc Ngập Tràn Yêu Thương",
+          meaning:
+            "Kính chúc ông bà/cha mẹ sống lâu vô hạn, gia đình hạnh phúc tràn ngập yêu thương (lời chúc đặc biệt dành cho bậc sinh thành).",
+        },
+        {
+          text: "Chúc Năm Mới Tâm An Vạn Sự An, Thân Khỏe Bách Bệnh Tan",
+          meaning:
+            "Chúc năm mới tâm hồn an yên thì vạn sự đều an, thân thể khỏe mạnh thì trăm bệnh tiêu tan.",
+        },
+        {
+          text: "Xuân An Khang Vạn Lộc Tới, Tết Thịnh Vượng Phú Quý Lai",
+          meaning:
+            "Chúc mùa xuân an khang và vạn lộc tới, Tết thịnh vượng và phú quý đến.",
+        },
+      ];
+
+      function addLoadingIndicator() {
+        const preview = document.getElementById("card-preview");
+        const loadingOverlay = document.createElement("div");
+        loadingOverlay.id = "loading-overlay";
+        loadingOverlay.className =
+          "absolute inset-0 bg-black/50 flex items-center justify-center z-10";
+        loadingOverlay.innerHTML = `
+       <div class="animate-spin rounded-full h-16 w-16 border-4 border-white border-t-transparent"></div>
+   `;
+        preview.appendChild(loadingOverlay);
+      }
+
+      function removeLoadingIndicator() {
+        const overlay = document.getElementById("loading-overlay");
+        if (overlay) overlay.remove();
+      }
+
+      function randomBackground() {
+        addLoadingIndicator();
+        const bg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+        const imgElement = document.getElementById("background");
+        imgElement.src = bg.preview;
+        const newImage = new Image();
+        newImage.onload = () => {
+          imgElement.src = bg.preview;
+          removeLoadingIndicator();
+        };
+        newImage.src = bg.preview;
+      }
+
+      function randomWish() {
+        const wish = wishes[Math.floor(Math.random() * wishes.length)];
+        document.getElementById("wish-text").textContent = wish.text;
+        document.getElementById(
+          "wish-meaning"
+        ).textContent = `Ý nghĩa: ${wish.meaning}`;
+      }
+
+      document.getElementById("custom-wish").addEventListener("input", (e) => {
+        document.getElementById("wish-text").textContent = e.target.value;
+        document.getElementById("wish-meaning").textContent =
+          "Ý nghĩa: Lời chúc từ tấm lòng của bạn";
+      });
+
+      function drawWrappedText(
+        ctx,
+        text,
+        boxX,
+        boxY,
+        boxWidth,
+        boxHeight,
+        fontSize,
+        fontFamily
+      ) {
+        ctx.font = `700 ${fontSize}px ${fontFamily}`;
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        const words = text.split(" ");
+        const lines = [];
+        let currentLine = words[0];
+
+        for (let i = 1; i < words.length; i++) {
+          const word = words[i];
+          const width = ctx.measureText(currentLine + " " + word).width;
+
+          if (width < boxWidth - 150) {
+            currentLine += " " + word;
+          } else {
+            lines.push(currentLine);
+            currentLine = word;
+          }
+        }
+        lines.push(currentLine);
+
+        const lineHeight = fontSize * 1.5;
+        const totalHeight = lines.length * lineHeight;
+        const startY = boxY + (boxHeight - totalHeight) / 2;
+
+        lines.forEach((line, i) => {
+          const y = startY + i * lineHeight + lineHeight / 2;
+          ctx.fillText(line, boxX + boxWidth / 2, y);
+        });
+      }
+
+      function updateFontSize(size) {
+        document.getElementById("wish-text").style.fontSize = `${size}px`;
+      }
+
+      function updateFont(fontFamily) {
+        document.getElementById(
+          "wish-text"
+        ).style.fontFamily = `'${fontFamily}', sans-serif`;
+      }
+
+      function toggleMeaning(show) {
+        document.getElementById("wish-meaning").parentElement.style.display =
+          show ? "block" : "none";
+      }
+
+      fabric.Object.prototype.set({
+        transparentCorners: false,
+        borderColor: "#51B9F9",
+        cornerColor: "#FFF",
+        cornerStrokeColor: "#51B9F9",
+        cornerSize: 12,
+        padding: 5,
+        cornerStyle: "circle",
+        borderScaleFactor: 2.5,
+      });
+
+      // Danh sách sticker
+      const stickers = [
+        { src: "stickers/hoa-mai.png", type: "hoa" },
+        { src: "stickers/hoa-dao.png", type: "hoa" },
+        { src: "stickers/hoa-sen.png", type: "hoa" },
+        { src: "stickers/li-xi.png", type: "tetItems" },
+        { src: "stickers/phao.png", type: "tetItems" },
+        { src: "stickers/den-long.png", type: "tetItems" },
+        { src: "stickers/cay-quat.png", type: "tetItems" },
+        { src: "stickers/non-la.png", type: "tetItems" },
+        { src: "stickers/banh-chung.png", type: "food" },
+        { src: "stickers/qua-buoi.png", type: "food" },
+      ];
+
+      let fabricCanvas;
+
+      function initCanvas() {
+        fabricCanvas = new fabric.Canvas("sticker-canvas", {
+          preserveObjectStacking: true,
+          selection: true,
+          interactive: true,
+          enableRetinaScaling: true,
+          width: 353,
+          height: 530,
+        });
+
+        fabric.Object.prototype.set({
+          transparentCorners: false,
+          borderColor: "#51B9F9",
+          cornerColor: "#FFF",
+          cornerStrokeColor: "#51B9F9",
+          cornerSize: 12,
+          padding: 5,
+          cornerStyle: "circle",
+          borderScaleFactor: 2.5,
+        });
+
+        // Xử lý việc kéo thả objects
+        fabricCanvas.on("object:moving", function (e) {
+          const obj = e.target;
+          const bounds = obj.getBoundingRect();
+
+          if (bounds.left < 0) {
+            obj.left = obj.getBoundingRect().width / 2;
+          }
+          if (bounds.top < 0) {
+            obj.top = obj.getBoundingRect().height / 2;
+          }
+          if (bounds.left + bounds.width > fabricCanvas.width) {
+            obj.left = fabricCanvas.width - obj.getBoundingRect().width / 2;
+          }
+          if (bounds.top + bounds.height > fabricCanvas.height) {
+            obj.top = fabricCanvas.height - obj.getBoundingRect().height / 2;
+          }
+        });
+      }
+
+      function addStickerToCanvas(src) {
+        fabric.Image.fromURL(src, function (img) {
+          const maxDim = 100;
+
+          if (img.width > img.height) {
+            img.scaleToWidth(maxDim);
+          } else {
+            img.scaleToHeight(maxDim);
+          }
+
+          const scaledWidth = img.width * img.scaleX;
+          const scaledHeight = img.height * img.scaleY;
+
+          img.set({
+            left: scaledWidth / 2,
+            top: scaledHeight / 2,
+            originX: "center",
+            originY: "center",
+            hasControls: true,
+            hasBorders: true,
+            lockUniScaling: false,
+          });
+
+          fabricCanvas.add(img);
+          fabricCanvas.setActiveObject(img);
+          fabricCanvas.renderAll();
+        });
+      }
+
+      function deleteSelectedObject() {
+        const activeObjects = fabricCanvas.getActiveObjects();
+        fabricCanvas.discardActiveObject();
+        if (activeObjects.length) {
+          fabricCanvas.remove(...activeObjects);
+        }
+        fabricCanvas.renderAll();
+      }
+
+      function bringToFront() {
+        const activeObject = fabricCanvas.getActiveObject();
+        if (activeObject) {
+          activeObject.bringToFront();
+          fabricCanvas.renderAll();
+        }
+      }
+
+      function sendToBack() {
+        const activeObject = fabricCanvas.getActiveObject();
+        if (activeObject) {
+          activeObject.sendToBack();
+          fabricCanvas.renderAll();
+        }
+      }
+
+      function downloadCard() {
+        const downloadCanvas = document.createElement("canvas");
+        const ctx = downloadCanvas.getContext("2d");
+        downloadCanvas.width = 853;
+        downloadCanvas.height = 1280;
+        const scale = 2.42;
+
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, downloadCanvas.width, downloadCanvas.height);
+
+          const stickerObjects = fabricCanvas.getObjects();
+          stickerObjects.forEach((obj) => {
+            if (obj.type === "image") {
+              const stickerScale = obj.scaleX * scale;
+              const newLeft = obj.left * scale;
+              const newTop = obj.top * scale;
+              const newWidth = obj.width * stickerScale;
+              const newHeight = obj.height * stickerScale;
+
+              const stickerImg = new Image();
+              stickerImg.src = obj._originalElement.src;
+
+              ctx.save();
+
+              ctx.translate(newLeft, newTop);
+
+              if (obj.angle) {
+                ctx.rotate((obj.angle * Math.PI) / 180);
+              }
+
+              ctx.drawImage(
+                stickerImg,
+                -newWidth / 2,
+                -newHeight / 2,
+                newWidth,
+                newHeight
+              );
+
+              ctx.restore();
+            }
+          });
+
+          const textBox = document.querySelector(".back");
+          const wishText = document.getElementById("wish-text");
+          const boxStyle = getComputedStyle(textBox);
+          const textStyle = getComputedStyle(wishText);
+
+          const boxWidth = parseInt(boxStyle.width) * scale;
+          const boxHeight = parseInt(boxStyle.height) * scale;
+          const boxX = (downloadCanvas.width - boxWidth) / 2;
+          const boxY = (downloadCanvas.height - boxHeight) / 2;
+
+          ctx.fillStyle = "#770100";
+          ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+
+          const fontSize = parseInt(textStyle.fontSize) * scale;
+          ctx.font = `700 ${fontSize}px ${wishText.style.fontFamily}`;
+          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          drawWrappedText(
+            ctx,
+            wishText.textContent,
+            boxX,
+            boxY,
+            boxWidth,
+            boxHeight,
+            fontSize,
+            wishText.style.fontFamily
+          );
+
+          const link = document.createElement("a");
+          link.download = `ChucTetAtTy_NgaoPhongVan.png`;
+          link.href = downloadCanvas.toDataURL("image/png", 1.0);
+          link.click();
+        };
+        const currentBg = document.getElementById("background").src;
+        const bgIndex = backgrounds.findIndex((bg) => bg.preview === currentBg);
+        img.src = backgrounds[bgIndex].original;
+      }
+
+      function shareCard() {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 853;
+        canvas.height = 1280;
+        const scale = 2.42;
+
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const stickerObjects = fabricCanvas.getObjects();
+          stickerObjects.forEach((obj) => {
+            if (obj.type === "image") {
+              const stickerScale = obj.scaleX * scale;
+              const newLeft = obj.left * scale;
+              const newTop = obj.top * scale;
+              const newWidth = obj.width * stickerScale;
+              const newHeight = obj.height * stickerScale;
+
+              const stickerImg = new Image();
+              stickerImg.src = obj.getSrc();
+
+              ctx.save();
+              ctx.translate(newLeft, newTop);
+              if (obj.angle) {
+                ctx.rotate((obj.angle * Math.PI) / 180);
+              }
+              ctx.drawImage(
+                stickerImg,
+                -newWidth / 2,
+                -newHeight / 2,
+                newWidth,
+                newHeight
+              );
+              ctx.restore();
+            }
+          });
+
+          const textBox = document.querySelector(".back");
+          const wishText = document.getElementById("wish-text");
+          const boxStyle = getComputedStyle(textBox);
+          const textStyle = getComputedStyle(wishText);
+
+          const boxWidth = parseInt(boxStyle.width) * scale;
+          const boxHeight = parseInt(boxStyle.height) * scale;
+          const boxX = (canvas.width - boxWidth) / 2;
+          const boxY = (canvas.height - boxHeight) / 2;
+
+          ctx.fillStyle = "#770100";
+          ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+
+          const fontSize = parseInt(textStyle.fontSize) * scale;
+          ctx.font = `700 ${fontSize}px ${wishText.style.fontFamily}`;
+          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          drawWrappedText(
+            ctx,
+            wishText.textContent,
+            boxX,
+            boxY,
+            boxWidth,
+            boxHeight,
+            fontSize,
+            wishText.style.fontFamily
+          );
+
+          canvas.toBlob((blob) => {
+            if (navigator.share) {
+              const file = new File([blob], "ChucTetAtTy_NgaoPhongVan.png", {
+                type: "image/png",
+              });
+              navigator.share({
+                files: [file],
+                title: "Thiệp chúc Tết",
+                text: "Chúc mừng năm mới!",
+              });
+            }
+          });
+        };
+        const currentBg = document.getElementById("background").src;
+        const bgIndex = backgrounds.findIndex((bg) => bg.preview === currentBg);
+        img.src = backgrounds[bgIndex].original;
+      }
+
+      function loadStickers() {
+        const container = document.getElementById("stickerContainer");
+        stickers.forEach((sticker) => {
+          const img = document.createElement("img");
+          img.src = sticker.src;
+          img.className = "sticker-item";
+          img.onclick = () => addStickerToCanvas(sticker.src);
+          container.appendChild(img);
+        });
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Delete" || e.key === "Backspace") {
+          deleteSelectedObject();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        const container = document.getElementById("card-preview");
+        fabricCanvas.setDimensions({
+          width: container.offsetWidth,
+          height: container.offsetHeight,
+        });
+        fabricCanvas.renderAll();
+      });
+
+      window.addEventListener("load", function () {
+        initCanvas();
+        loadStickers();
+      });
+
+      // Countdown Timer
       function updateCountdown() {
-        const tetDate = new Date("2025-01-29T00:00:00");
+        const lunarNew = new Date("2025-01-29T00:00:00+07:00"); // Thời điểm giao thừa 2025
         const now = new Date();
-        const diff = tetDate - now;
+        const diff = lunarNew - now;
 
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
@@ -246,21 +1187,80 @@
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById("days").textContent = days
-          .toString()
-          .padStart(2, "0");
-        document.getElementById("hours").textContent = hours
-          .toString()
-          .padStart(2, "0");
-        document.getElementById("minutes").textContent = minutes
-          .toString()
-          .padStart(2, "0");
-        document.getElementById("seconds").textContent = seconds
-          .toString()
-          .padStart(2, "0");
+        document.getElementById("days").innerText = String(days).padStart(
+          2,
+          "0"
+        );
+        document.getElementById("hours").innerText = String(hours).padStart(
+          2,
+          "0"
+        );
+        document.getElementById("minutes").innerText = String(minutes).padStart(
+          2,
+          "0"
+        );
+        document.getElementById("seconds").innerText = String(seconds).padStart(
+          2,
+          "0"
+        );
       }
-      updateCountdown();
+
       setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Rotating Wishes
+      let currentWishIndex = 0;
+
+      function updateRotatingWish() {
+        const wishElement = document.getElementById("rotating-wish");
+        wishElement.textContent = wishes[currentWishIndex].text;
+        currentWishIndex = (currentWishIndex + 1) % wishes.length;
+      }
+
+      function toggleFontDropdown() {
+        const dropdown = document.getElementById("font-dropdown");
+        dropdown.classList.toggle("hidden");
+      }
+
+      function selectFont(fontFamily) {
+        updateFont(fontFamily);
+        document.getElementById(
+          "selected-font"
+        ).style.fontFamily = `'${fontFamily}', sans-serif`;
+        document.getElementById("selected-font").textContent =
+          fontFamily === "TenFont1"
+            ? "Font 1"
+            : fontFamily === "TenFont2"
+            ? "Font 2"
+            : "Font 3";
+        toggleFontDropdown();
+      }
+
+      // Đóng dropdown khi click ra ngoài
+      document.addEventListener("click", function (e) {
+        const dropdown = document.getElementById("font-dropdown");
+        const button = e.target.closest("button");
+        if (!button && !dropdown.contains(e.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
+
+      setInterval(updateRotatingWish, 5000);
+      updateRotatingWish();
+
+      document
+        .getElementById("random-bg")
+        .addEventListener("click", randomBackground);
+      document
+        .getElementById("random-wish")
+        .addEventListener("click", randomWish);
+      document.getElementById("custom-wish").addEventListener("input", (e) => {
+        document.getElementById("wish-text").textContent = e.target.value;
+      });
+      document
+        .getElementById("download")
+        .addEventListener("click", downloadCard);
+      document.getElementById("share").addEventListener("click", shareCard);
     </script>
   </body>
 </html>
