@@ -235,7 +235,9 @@
                     line-height: 1.5;
                     font-weight: 700;
                   "
-                >Chúc Mừng Năm Mới</p>
+                >
+                  Chúc Mừng Năm Mới
+                </p>
               </div>
               <div class="bg-black/50 p-4 w-[280px] rounded-lg">
                 <p id="wish-meaning" class="text-white/90 text-center text-sm">
@@ -249,12 +251,8 @@
               <button class="control-btn" onclick="deleteSelectedObject()">
                 Xóa
               </button>
-              <button class="control-btn" onclick="bringToFront()">
-                Lên
-              </button>
-              <button class="control-btn" onclick="sendToBack()">
-                Xuống
-              </button>
+              <button class="control-btn" onclick="bringToFront()">Lên</button>
+              <button class="control-btn" onclick="sendToBack()">Xuống</button>
             </div>
           </div>
 
@@ -763,7 +761,7 @@
         addLoadingIndicator();
         const bg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
         const imgElement = document.getElementById("background");
-        imgElement.src = bg.preview;
+
         const newImage = new Image();
         newImage.onload = () => {
           imgElement.src = bg.preview;
@@ -1048,8 +1046,14 @@
           link.click();
         };
         const currentBg = document.getElementById("background").src;
-        const bgIndex = backgrounds.findIndex((bg) => bg.preview === currentBg);
-        img.src = backgrounds[bgIndex].original;
+        const bgIndex = backgrounds.findIndex((bg) =>
+          currentBg.includes(bg.preview.split("/").pop())
+        );
+        if (bgIndex !== -1) {
+          img.src = backgrounds[bgIndex].original;
+        } else {
+          img.src = currentBg;
+        }
       }
 
       function shareCard() {
@@ -1139,8 +1143,14 @@
           });
         };
         const currentBg = document.getElementById("background").src;
-        const bgIndex = backgrounds.findIndex((bg) => bg.preview === currentBg);
-        img.src = backgrounds[bgIndex].original;
+        const bgIndex = backgrounds.findIndex((bg) =>
+          currentBg.includes(bg.preview.split("/").pop())
+        );
+        if (bgIndex !== -1) {
+          img.src = backgrounds[bgIndex].original;
+        } else {
+          img.src = currentBg;
+        }
       }
 
       function loadStickers() {
