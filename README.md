@@ -3,8 +3,7 @@
 <div align="center">
   <img src="./images/preview.png" alt="Preview" width="600px">
   
-  [![Website](https://img.shields.io/badge/Website-Live%20Demo-brightgreen)](https://bnatlu.id.vn)
-  [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+  [![Website](https://img.shields.io/badge/Website-Live%20Demo-brightgreen)](https://ngaophongvan.github.io/AtTy2025/)
 </div>
 
 ## ✨ Tổng Quan
