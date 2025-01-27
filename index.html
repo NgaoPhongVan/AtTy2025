@@ -51,6 +51,26 @@
         font-family: "TenFont3";
         src: url("./fonts/TP Frauen Script.ttf") format("truetype");
       }
+      @font-face {
+        font-family: "TenFont4";
+        src: url("./fonts/TUV Above - Bold.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "TenFont5";
+        src: url("./fonts/NVN Morning Calm.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "TenFont6";
+        src: url("./fonts/Minh Tu.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "TenFont7";
+        src: url("./fonts/LNTH-Korean_Calligraphy.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "TenFont8";
+        src: url("./fonts/0226-LNTH-Daybreaker.ttf") format("truetype");
+      }
       @keyframes gradient {
         0% {
           background-position: 0% 50%;
@@ -154,6 +174,33 @@
 
       .control-btn:hover {
         background: #f0f0f0;
+      }
+      .checkbox-container {
+        cursor: pointer;
+      }
+
+      .checkbox-container input {
+        display: none;
+      }
+
+      .checkbox-container svg {
+        overflow: visible;
+      }
+
+      .path {
+        fill: none;
+        stroke: black;
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+        stroke-dasharray: 241 9999999;
+        stroke-dashoffset: 0;
+      }
+
+      .checkbox-container input:checked ~ svg .path {
+        stroke-dasharray: 70.5096664428711 9999999;
+        stroke-dashoffset: -262.2723388671875;
       }
     </style>
   </head>
@@ -350,48 +397,63 @@
                     >
                       Chúc Mừng Năm Mới
                     </div>
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont4')"
+                      style="font-family: 'TenFont4', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont5')"
+                      style="font-family: 'TenFont5', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont6')"
+                      style="font-family: 'TenFont6', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont7')"
+                      style="font-family: 'TenFont7', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
+                    <div
+                      class="p-3 hover:bg-gray-100 cursor-pointer"
+                      onclick="selectFont('TenFont8')"
+                      style="font-family: 'TenFont8', sans-serif"
+                    >
+                      Chúc Mừng Năm Mới
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <script>
-                function toggleFontDropdown() {
-                  const dropdown = document.getElementById("font-dropdown");
-                  dropdown.classList.toggle("hidden");
-                }
-
-                function selectFont(fontFamily) {
-                  updateFont(fontFamily);
-                  document.getElementById(
-                    "selected-font"
-                  ).style.fontFamily = `'${fontFamily}', sans-serif`;
-                  document.getElementById("selected-font").textContent =
-                    fontFamily === "TenFont1"
-                      ? "Font 1"
-                      : fontFamily === "TenFont2"
-                      ? "Font 2"
-                      : "Font 3";
-                  toggleFontDropdown();
-                }
-
-                document.addEventListener("click", function (e) {
-                  const dropdown = document.getElementById("font-dropdown");
-                  const button = e.target.closest("button");
-                  if (!button && !dropdown.contains(e.target)) {
-                    dropdown.classList.add("hidden");
-                  }
-                });
-              </script>
-
               <div class="flex items-center">
-                <input
-                  type="checkbox"
-                  id="show-meaning"
-                  checked
-                  class="mr-2"
-                  onchange="toggleMeaning(this.checked)"
-                />
-                <label class="text-gray-700">Hiển thị ý nghĩa</label>
+                <label class="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id="show-meaning"
+                    checked
+                    class="mr-2"
+                    onchange="toggleMeaning(this.checked)"
+                  />
+                  <svg viewBox="0 0 64 64" height="1.2em" width="1.2em">
+                    <path
+                      d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                      pathLength="575.0541381835938"
+                      class="path"
+                    ></path>
+                  </svg>
+                </label>
+                <label class="text-gray-700 px-3">Hiển thị ý nghĩa</label>
               </div>
             </div>
           </div>
@@ -1225,19 +1287,50 @@
       }
 
       function selectFont(fontFamily) {
+        // Update font và style như bình thường
         updateFont(fontFamily);
         document.getElementById(
           "selected-font"
         ).style.fontFamily = `'${fontFamily}', sans-serif`;
-        document.getElementById("selected-font").textContent =
-          fontFamily === "TenFont1"
-            ? "Font 1"
-            : fontFamily === "TenFont2"
-            ? "Font 2"
-            : "Font 3";
+
+        // Xác định text hiển thị
+        let fontText;
+        switch (fontFamily) {
+          case "TenFont1":
+            fontText = "Font 1";
+            break;
+          case "TenFont2":
+            fontText = "Font 2";
+            break;
+          case "TenFont3":
+            fontText = "Font 3";
+            break;
+          case "TenFont4":
+            fontText = "Font 4";
+            break;
+          case "TenFont5":
+            fontText = "Font 5";
+            break;
+          case "TenFont6":
+            fontText = "Font 6";
+            break;
+          case "TenFont7":
+            fontText = "Font 7";
+            break;
+          case "TenFont8":
+            fontText = "Font 8";
+            break;
+          default:
+            fontText = "Font 1";
+        }
+
+        // Cập nhật text content
+        console.log("Selected font:", fontFamily, "Font text:", fontText); // Debug
+        document.getElementById("selected-font").textContent = fontText;
+
+        // Đóng dropdown
         toggleFontDropdown();
       }
-
       // Đóng dropdown khi click ra ngoài
       document.addEventListener("click", function (e) {
         const dropdown = document.getElementById("font-dropdown");

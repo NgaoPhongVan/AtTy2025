@@ -82,11 +82,11 @@ Mọi đóng góp đều được chào đón! Hãy:
 ## 👏 Credits
 
 - Tác giả: Lê Văn Thuận - Ngạo Phong Vân
-- Font chữ: [Hoa Sen Typeface](https://www.dafontvn.com/2024/06/hoa-sen-typeface.html), [TP Frauen](https://www.dafontvn.com/2024/01/font-viet-hoa-tp-frauen-2-font.html)
+- Font chữ: [Hoa Sen Typeface](https://www.dafontvn.com/2024/06/hoa-sen-typeface.html), [TP Frauen](https://www.dafontvn.com/2024/01/font-viet-hoa-tp-frauen-2-font.html), [Minh Tự](https://www.dafontvn.com/2022/01/font-chu-minh-tu-viet-hoa-cuc-ep.html), [Korean Calligraphy](https://www.dafontvn.com/2022/01/font-korean-calligraphy-viet-hoa.html), [NVNMorningCalm](), [TUV Above](https://www.dafontvn.com/2024/01/font-viet-hoa-tuv-above-4-font.html), [Daybreaker VH](https://www.dafontvn.com/2022/02/font-viet-hoa-daybreaker.html)
 
 ## 📬 Liên Hệ
 
-Le Van Thuan - [Facebook](https://www.facebook.com/ngao.phong.van) - thienle1247@gmail.com
+Ngạo Phong Vân - [Facebook](https://www.facebook.com/ngao.phong.van) - thienle1247@gmail.com
 
 Project Link: [Ất Tỵ 2025](https://github.com/NgaoPhongVan/AtTy2025)
 
