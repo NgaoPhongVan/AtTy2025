@@ -271,9 +271,7 @@
                     line-height: 1.5;
                     font-weight: 700;
                   "
-                >
-                  Chúc Mừng Năm Mới
-                </p>
+                >Chúc Mừng Năm Mới</p>
               </div>
               <div class="bg-black/50 p-4 w-[280px] rounded-lg">
                 <p id="wish-meaning" class="text-white/90 text-center text-sm">
@@ -484,7 +482,6 @@
           class="text-2xl font-bold mb-4"
           style="font-family: 'TenFont1', sans-serif"
         >
-          <!-- Rotating wishes will be displayed here -->
         </p>
         <p class="text-sm opacity-75">
           © 2025 Thiệp Chúc Tết. Thiết kế bởi Lê Văn Thuận - Ngạo Phong Vân
@@ -1010,7 +1007,6 @@
       }
 
       function drawMessageBox(ctx, boxX, boxY, boxWidth, boxHeight, scale) {
-        // Tạo gradient cho background
         const gradient = ctx.createLinearGradient(
           boxX,
           boxY,
@@ -1020,10 +1016,8 @@
         gradient.addColorStop(0, "#770100");
         gradient.addColorStop(1, "#5c0101");
 
-        // Độ bo góc
         const radius = 8 * scale;
 
-        // Vẽ hình chữ nhật với góc bo tròn
         ctx.beginPath();
         ctx.moveTo(boxX + radius, boxY);
         ctx.lineTo(boxX + boxWidth - radius, boxY);
@@ -1051,23 +1045,19 @@
         ctx.quadraticCurveTo(boxX, boxY, boxX + radius, boxY);
         ctx.closePath();
 
-        // Fill với gradient
         ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Vẽ viền với độ trong suốt
         ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
         ctx.lineWidth = 2 * scale;
         ctx.stroke();
 
-        // Thêm hiệu ứng bóng đổ nhẹ
         ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
         ctx.shadowBlur = 10 * scale;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 4 * scale;
       }
 
-      // Cập nhật hàm downloadCard
       function downloadCard() {
         const downloadCanvas = document.createElement("canvas");
         const ctx = downloadCanvas.getContext("2d");
@@ -1078,10 +1068,8 @@
         const img = new Image();
         img.crossOrigin = "Anonymous";
         img.onload = () => {
-          // Vẽ background
           ctx.drawImage(img, 0, 0, downloadCanvas.width, downloadCanvas.height);
 
-          // Vẽ stickers
           const stickerObjects = fabricCanvas.getObjects();
           stickerObjects.forEach((obj) => {
             if (obj.type === "image") {
@@ -1110,7 +1098,6 @@
             }
           });
 
-          // Lấy thông tin của text box
           const textBox = document.querySelector(".back");
           const wishText = document.getElementById("wish-text");
           const boxStyle = getComputedStyle(textBox);
@@ -1121,16 +1108,13 @@
           const boxX = (downloadCanvas.width - boxWidth) / 2;
           const boxY = (downloadCanvas.height - boxHeight) / 2;
 
-          // Vẽ message box với hiệu ứng mới
           drawMessageBox(ctx, boxX, boxY, boxWidth, boxHeight, scale);
 
-          // Reset shadow effect for text
           ctx.shadowColor = "transparent";
           ctx.shadowBlur = 0;
           ctx.shadowOffsetX = 0;
           ctx.shadowOffsetY = 0;
 
-          // Vẽ text
           const fontSize = parseInt(textStyle.fontSize) * scale;
           drawWrappedText(
             ctx,
@@ -1143,7 +1127,6 @@
             wishText.style.fontFamily
           );
 
-          // Tải ảnh
           const link = document.createElement("a");
           link.download = `ChucTetAtTy_NgaoPhongVan.png`;
           link.href = downloadCanvas.toDataURL("image/png", 1.0);
@@ -1161,7 +1144,6 @@
         }
       }
 
-      // Cập nhật hàm shareCard tương tự
       function shareCard() {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
@@ -1172,10 +1154,8 @@
         const img = new Image();
         img.crossOrigin = "Anonymous";
         img.onload = () => {
-          // Vẽ background
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-          // Vẽ stickers
           const stickerObjects = fabricCanvas.getObjects();
           stickerObjects.forEach((obj) => {
             if (obj.type === "image") {
@@ -1204,7 +1184,6 @@
             }
           });
 
-          // Lấy thông tin của text box
           const textBox = document.querySelector(".back");
           const wishText = document.getElementById("wish-text");
           const boxStyle = getComputedStyle(textBox);
@@ -1215,16 +1194,13 @@
           const boxX = (canvas.width - boxWidth) / 2;
           const boxY = (canvas.height - boxHeight) / 2;
 
-          // Vẽ message box với hiệu ứng mới
           drawMessageBox(ctx, boxX, boxY, boxWidth, boxHeight, scale);
 
-          // Reset shadow effect for text
           ctx.shadowColor = "transparent";
           ctx.shadowBlur = 0;
           ctx.shadowOffsetX = 0;
           ctx.shadowOffsetY = 0;
 
-          // Vẽ text
           const fontSize = parseInt(textStyle.fontSize) * scale;
           drawWrappedText(
             ctx,
@@ -1237,7 +1213,6 @@
             wishText.style.fontFamily
           );
 
-          // Share ảnh
           canvas.toBlob((blob) => {
             if (navigator.share) {
               const file = new File([blob], "ChucTetAtTy_NgaoPhongVan.png", {
@@ -1293,7 +1268,6 @@
         loadStickers();
       });
 
-      // Rotating Wishes
       let currentWishIndex = 0;
 
       function updateRotatingWish() {
@@ -1308,13 +1282,11 @@
       }
 
       function selectFont(fontFamily) {
-        // Update font và style như bình thường
         updateFont(fontFamily);
         document.getElementById(
           "selected-font"
         ).style.fontFamily = `'${fontFamily}', sans-serif`;
 
-        // Xác định text hiển thị
         let fontText;
         switch (fontFamily) {
           case "TenFont1":
@@ -1345,14 +1317,11 @@
             fontText = "Font 1";
         }
 
-        // Cập nhật text content
         console.log("Selected font:", fontFamily, "Font text:", fontText); // Debug
         document.getElementById("selected-font").textContent = fontText;
 
-        // Đóng dropdown
         toggleFontDropdown();
       }
-      // Đóng dropdown khi click ra ngoài
       document.addEventListener("click", function (e) {
         const dropdown = document.getElementById("font-dropdown");
         const button = e.target.closest("button");
