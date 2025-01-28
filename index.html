@@ -229,11 +229,11 @@
 
         <div class="flex justify-center gap-4 text-center">
           <h1
-          class="text-3xl font-bold"
-          style="font-family: 'TenFont1', sans-serif"
-        >
-          Mùng 1 Tết
-        </h1>
+            class="text-3xl font-bold"
+            style="font-family: 'TenFont1', sans-serif"
+          >
+            Mùng 1 Tết
+          </h1>
         </div>
       </div>
     </header>
@@ -271,7 +271,9 @@
                     line-height: 1.5;
                     font-weight: 700;
                   "
-                >Chúc Mừng Năm Mới</p>
+                >
+                  Chúc Mừng Năm Mới
+                </p>
               </div>
               <div class="bg-black/50 p-4 w-[280px] rounded-lg">
                 <p id="wish-meaning" class="text-white/90 text-center text-sm">
@@ -1007,6 +1009,65 @@
         }
       }
 
+      function drawMessageBox(ctx, boxX, boxY, boxWidth, boxHeight, scale) {
+        // Tạo gradient cho background
+        const gradient = ctx.createLinearGradient(
+          boxX,
+          boxY,
+          boxX,
+          boxY + boxHeight
+        );
+        gradient.addColorStop(0, "#770100");
+        gradient.addColorStop(1, "#5c0101");
+
+        // Độ bo góc
+        const radius = 8 * scale;
+
+        // Vẽ hình chữ nhật với góc bo tròn
+        ctx.beginPath();
+        ctx.moveTo(boxX + radius, boxY);
+        ctx.lineTo(boxX + boxWidth - radius, boxY);
+        ctx.quadraticCurveTo(
+          boxX + boxWidth,
+          boxY,
+          boxX + boxWidth,
+          boxY + radius
+        );
+        ctx.lineTo(boxX + boxWidth, boxY + boxHeight - radius);
+        ctx.quadraticCurveTo(
+          boxX + boxWidth,
+          boxY + boxHeight,
+          boxX + boxWidth - radius,
+          boxY + boxHeight
+        );
+        ctx.lineTo(boxX + radius, boxY + boxHeight);
+        ctx.quadraticCurveTo(
+          boxX,
+          boxY + boxHeight,
+          boxX,
+          boxY + boxHeight - radius
+        );
+        ctx.lineTo(boxX, boxY + radius);
+        ctx.quadraticCurveTo(boxX, boxY, boxX + radius, boxY);
+        ctx.closePath();
+
+        // Fill với gradient
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // Vẽ viền với độ trong suốt
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+        ctx.lineWidth = 2 * scale;
+        ctx.stroke();
+
+        // Thêm hiệu ứng bóng đổ nhẹ
+        ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
+        ctx.shadowBlur = 10 * scale;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 4 * scale;
+      }
+
+      // Cập nhật hàm downloadCard
       function downloadCard() {
         const downloadCanvas = document.createElement("canvas");
         const ctx = downloadCanvas.getContext("2d");
@@ -1017,8 +1078,10 @@
         const img = new Image();
         img.crossOrigin = "Anonymous";
         img.onload = () => {
+          // Vẽ background
           ctx.drawImage(img, 0, 0, downloadCanvas.width, downloadCanvas.height);
 
+          // Vẽ stickers
           const stickerObjects = fabricCanvas.getObjects();
           stickerObjects.forEach((obj) => {
             if (obj.type === "image") {
@@ -1032,13 +1095,10 @@
               stickerImg.src = obj._originalElement.src;
 
               ctx.save();
-
               ctx.translate(newLeft, newTop);
-
               if (obj.angle) {
                 ctx.rotate((obj.angle * Math.PI) / 180);
               }
-
               ctx.drawImage(
                 stickerImg,
                 -newWidth / 2,
@@ -1046,11 +1106,11 @@
                 newWidth,
                 newHeight
               );
-
               ctx.restore();
             }
           });
 
+          // Lấy thông tin của text box
           const textBox = document.querySelector(".back");
           const wishText = document.getElementById("wish-text");
           const boxStyle = getComputedStyle(textBox);
@@ -1061,18 +1121,17 @@
           const boxX = (downloadCanvas.width - boxWidth) / 2;
           const boxY = (downloadCanvas.height - boxHeight) / 2;
 
-          ctx.fillStyle = "#770100";
-          ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
-          ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
-          ctx.lineWidth = 2;
-          ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+          // Vẽ message box với hiệu ứng mới
+          drawMessageBox(ctx, boxX, boxY, boxWidth, boxHeight, scale);
 
+          // Reset shadow effect for text
+          ctx.shadowColor = "transparent";
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+
+          // Vẽ text
           const fontSize = parseInt(textStyle.fontSize) * scale;
-          ctx.font = `700 ${fontSize}px ${wishText.style.fontFamily}`;
-          ctx.fillStyle = "white";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-
           drawWrappedText(
             ctx,
             wishText.textContent,
@@ -1084,11 +1143,13 @@
             wishText.style.fontFamily
           );
 
+          // Tải ảnh
           const link = document.createElement("a");
           link.download = `ChucTetAtTy_NgaoPhongVan.png`;
           link.href = downloadCanvas.toDataURL("image/png", 1.0);
           link.click();
         };
+
         const currentBg = document.getElementById("background").src;
         const bgIndex = backgrounds.findIndex((bg) =>
           currentBg.includes(bg.preview.split("/").pop())
@@ -1100,6 +1161,7 @@
         }
       }
 
+      // Cập nhật hàm shareCard tương tự
       function shareCard() {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
@@ -1110,8 +1172,10 @@
         const img = new Image();
         img.crossOrigin = "Anonymous";
         img.onload = () => {
+          // Vẽ background
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
+          // Vẽ stickers
           const stickerObjects = fabricCanvas.getObjects();
           stickerObjects.forEach((obj) => {
             if (obj.type === "image") {
@@ -1140,6 +1204,7 @@
             }
           });
 
+          // Lấy thông tin của text box
           const textBox = document.querySelector(".back");
           const wishText = document.getElementById("wish-text");
           const boxStyle = getComputedStyle(textBox);
@@ -1150,18 +1215,17 @@
           const boxX = (canvas.width - boxWidth) / 2;
           const boxY = (canvas.height - boxHeight) / 2;
 
-          ctx.fillStyle = "#770100";
-          ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
-          ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
-          ctx.lineWidth = 2;
-          ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+          // Vẽ message box với hiệu ứng mới
+          drawMessageBox(ctx, boxX, boxY, boxWidth, boxHeight, scale);
 
+          // Reset shadow effect for text
+          ctx.shadowColor = "transparent";
+          ctx.shadowBlur = 0;
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+
+          // Vẽ text
           const fontSize = parseInt(textStyle.fontSize) * scale;
-          ctx.font = `700 ${fontSize}px ${wishText.style.fontFamily}`;
-          ctx.fillStyle = "white";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-
           drawWrappedText(
             ctx,
             wishText.textContent,
@@ -1173,6 +1237,7 @@
             wishText.style.fontFamily
           );
 
+          // Share ảnh
           canvas.toBlob((blob) => {
             if (navigator.share) {
               const file = new File([blob], "ChucTetAtTy_NgaoPhongVan.png", {
@@ -1186,6 +1251,7 @@
             }
           });
         };
+
         const currentBg = document.getElementById("background").src;
         const bgIndex = backgrounds.findIndex((bg) =>
           currentBg.includes(bg.preview.split("/").pop())
@@ -1196,7 +1262,6 @@
           img.src = currentBg;
         }
       }
-
       function loadStickers() {
         const container = document.getElementById("stickerContainer");
         stickers.forEach((sticker) => {
@@ -1227,40 +1292,6 @@
         initCanvas();
         loadStickers();
       });
-
-      // Countdown Timer
-      function updateCountdown() {
-        const lunarNew = new Date("2025-01-29T00:00:00+07:00"); // Thời điểm giao thừa 2025
-        const now = new Date();
-        const diff = lunarNew - now;
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = String(days).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("hours").innerText = String(hours).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("minutes").innerText = String(minutes).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("seconds").innerText = String(seconds).padStart(
-          2,
-          "0"
-        );
-      }
-
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
 
       // Rotating Wishes
       let currentWishIndex = 0;
