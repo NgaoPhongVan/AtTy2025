@@ -65,7 +65,6 @@ npx http-server
 
 <div align="center">
   <img src="./images/demo-1.png" width="200px">
-  <img src="./images/demo-2.png" width="200px">
   <img src="./images/demo-3.png" width="200px">
 </div>
 
